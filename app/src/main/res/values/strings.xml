@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SQLite</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="create_database">create_database</string>
+    <string name="update_database">更新数据库</string>
+    <string name="insert">Insert</string>
+    <string name="update">Update</string>
+    <string name="query">Query</string>
+    <string name="delete">Delete_record</string>
+    <string name="delete_database">Delete_database</string>
+
+    <string name="To_DataMaintenance">数据维护</string>
+    <string name="To_DataSearch">数据查找</string>
+    <string name="To_DataStatistics">数据统计</string>
+
+    <string name="title_activity_data_maintenance">数据维护</string>
+    <string name="title_activity_data_search">数据查找</string>
+    <string name="title_activity_data_statistics">数据统计</string>
+    <string name="title_activity_mtn_data_insert">请您选择数据插入的类型</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello please input student information:</string>
+    <string name="hello_course_fragment">Hello this is course fragment:</string>
+    <string name="hello_score_fragment">Hello this is score fragment:</string>
+</resources>
