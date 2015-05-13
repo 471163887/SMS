@@ -1,7 +1,9 @@
 package com.example.fury.sqlite.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +22,6 @@ public class DataSearchActivity extends ActionBarActivity {
     private ArrayAdapter<String> adapter;
 
     private List<String> dataList = new ArrayList<String>();
-
-    private int currentLevel;
-    public static final int LEVEL_SEARCH = 0;
-    public static final int LEVEL_STUDENT = 1;
-    public static final int LEVEL_COURSE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,25 +45,18 @@ public class DataSearchActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> arg0, View view,
                                     int position, long id) {
 
-                if (currentLevel == LEVEL_PROVINCE) {
-                    selectedProvince = provinceList.get(position);
-					/*
-					String provinceCode = provinceList.get(position).getProvinceCode();
-					Intent intent2 = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
-					intent2.putExtra("provinceCode", provinceCode);
-					startActivity(intent2);
-					finish();
-					return;*/
-                    queryCities();
-                } else if (currentLevel == LEVEL_CITY) {
-                    selectedCity = cityList.get(position);
-                    queryCounties();
-                } else if (currentLevel == LEVEL_COUNTY) {
-                    String countyCode = countyList.get(position).getCountyCode();
-                    Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
-                    intent.putExtra("county_code", countyCode);
+                if (id == 0) {
+                    Intent intent = new Intent(DataSearchActivity.this, InfWithStuNum.class);
                     startActivity(intent);
-                    finish();
+                } else if (id == 1) {
+                    Intent intent = new Intent(DataSearchActivity.this, InfWithStuName.class);
+                    startActivity(intent);
+                } else if (id == 2) {
+                    Intent intent = new Intent(DataSearchActivity.this, InfWithCouNum.class);
+                    startActivity(intent);
+                } else if (id == 3) {
+                    Intent intent = new Intent(DataSearchActivity.this, InfWithCouName.class);
+                    startActivity(intent);
                 }
             }
 

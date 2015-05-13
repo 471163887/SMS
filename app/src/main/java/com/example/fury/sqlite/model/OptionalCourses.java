@@ -8,6 +8,9 @@ public class OptionalCourses {
     private String Cnum;
     private String Cname;
 
+    public OptionalCourses(){
+
+    }
     public OptionalCourses(int Ccredit, String Cnum, String Cname){
         this.Ccredit = Ccredit;
         this.Cnum = Cnum;

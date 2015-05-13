@@ -35,6 +35,30 @@
             android:name=".Activity.MtnDataInsert"
             android:label="@string/title_activity_mtn_data_insert" >
         </activity>
+        <activity
+            android:name=".Activity.InfWithStuNum"
+            android:label="@string/title_activity_inf_with_stu_num" >
+        </activity>
+        <activity
+            android:name=".Activity.InfWithStuName"
+            android:label="@string/title_activity_inf_with_stu_name" >
+        </activity>
+        <activity
+            android:name=".Activity.InfWithCouNum"
+            android:label="@string/title_activity_inf_with_cou_num" >
+        </activity>
+        <activity
+            android:name=".Activity.InfWithCouName"
+            android:label="@string/title_activity_inf_with_cou_name" >
+        </activity>
+        <activity
+            android:name=".Activity.MtnDataDelete"
+            android:label="@string/title_activity_mtn_data_delete" >
+        </activity>
+        <activity
+            android:name=".Activity.MtnDataModify"
+            android:label="@string/title_activity_mtn_data_modify" >
+        </activity>
     </application>
 
 </manifest>

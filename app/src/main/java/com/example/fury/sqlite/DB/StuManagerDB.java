@@ -14,7 +14,7 @@ public class StuManagerDB {
     /**
      * 数据库名
      */
-    public static final String DB_NAME = "stu_";
+    public static final String DB_NAME = "stu_manager.db";
     /**
      * 数据库版本
      */

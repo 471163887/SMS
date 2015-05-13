@@ -146,15 +146,9 @@ public class AddStuFragment extends Fragment {
                 values.put("Sphone", student.getSphone());
                 values.put("Sage", student.getSage());
 
-
                 db.insert("Student", null, values);
                 Toast.makeText(mContext, "插入数据库成功！", Toast.LENGTH_SHORT).show();
 
-                //query database if exists   exist cancle else continue
-                /**
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                SucceedFragment succeedFragment = new SucceedFragment();
-                ft.replace(R.id.framelayout_lesson,succeedFragment).commit();*/
             }
         });
 

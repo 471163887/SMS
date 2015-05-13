@@ -8,6 +8,8 @@ public class Scores {
     private String Cnum;
     private String Score;
 
+    public Scores(){
+    }
     public Scores(String Snum, String Cnum, String Score){
         this.Snum = Snum;
         this.Cnum = Cnum;

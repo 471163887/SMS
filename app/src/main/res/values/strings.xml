@@ -24,4 +24,10 @@
     <string name="hello_blank_fragment">Hello please input student information:</string>
     <string name="hello_course_fragment">Hello this is course fragment:</string>
     <string name="hello_score_fragment">Hello this is score fragment:</string>
+    <string name="title_activity_inf_with_stu_num">InfWithStuNum</string>
+    <string name="title_activity_inf_with_stu_name">InfWithStuName</string>
+    <string name="title_activity_inf_with_cou_num">InfWithCouNum</string>
+    <string name="title_activity_inf_with_cou_name">InfWithCouName</string>
+    <string name="title_activity_mtn_data_delete">MtnDataDelete</string>
+    <string name="title_activity_mtn_data_modify">MtnDataModify</string>
 </resources>

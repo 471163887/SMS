@@ -33,17 +33,22 @@ public class DataMaintenanceActivity extends ActionBarActivity {
         delete = (Button) findViewById(R.id.data_delete);
         delete.setOnClickListener(new DeleteOnClickListener());
         modify = (Button) findViewById(R.id.data_modify);
+        modify.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataModify.class);
+                startActivity(intent);
+            }
+        });
     }
     public class CreateOnClickListener implements View.OnClickListener {
         public void onClick(View v) {
             //创建一个DatabaseHelper类的对象，该类是单独一个java文件,这里采用2个参数的构造函数，建立的数据
             DatabaseHelper database_helper = new DatabaseHelper(DataMaintenanceActivity.this, "stu_manager.db");
-            //只有调用getReadableDatabase()或者getWriteableDatabase()函数后才能返回一个SQLiteDatabase对象
             SQLiteDatabase db = database_helper.getReadableDatabase();
             Toast.makeText(DataMaintenanceActivity.this,"Create Database Successed !",Toast.LENGTH_LONG).show();
         }
     }
-
     public class InsertOnClickListener implements View.OnClickListener {
 
         public void onClick(View v) {
@@ -54,7 +59,7 @@ public class DataMaintenanceActivity extends ActionBarActivity {
     public class DeleteOnClickListener implements View.OnClickListener {
 
         public void onClick(View v) {
-            Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataInsert.class);
+            Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataDelete.class);
             startActivity(intent);
         }
     }
@@ -70,7 +75,6 @@ public class DataMaintenanceActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
