@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fury.sqlite.DatabaseHelper;
 import com.example.fury.sqlite.R;
@@ -93,6 +94,7 @@ public class DeleteFragment extends Fragment {
                     db.delete("Student", "Snum=?", new String[]{Snum});
                     Log.d("nimeiya", Snum);
                     Log.d("nimeiya", "Snum删不掉");
+                    Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -110,6 +112,7 @@ public class DeleteFragment extends Fragment {
                     db.delete("Courses", "Cnum=?", new String[]{Cnum});
                     Log.d("nimeiya", Cnum);
                     Log.d("nimeiya", "Snum删不掉");
+                    Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -130,6 +133,7 @@ public class DeleteFragment extends Fragment {
                     Log.d("nimeiya", Cnum);
                     Log.d("nimeiya", Snum);
                     Log.d("nimeiya", "Snum删不掉");
+                    Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
                 }
             });
 

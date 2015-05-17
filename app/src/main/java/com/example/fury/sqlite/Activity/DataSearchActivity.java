@@ -32,10 +32,10 @@ public class DataSearchActivity extends ActionBarActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
-        dataList.add("1.按学生学号查找 学生基本信息、成绩信息");
-        dataList.add("2.按学生姓名查找 学生基本信息、成绩信息");
-        dataList.add("3.按课程编号查找 课程信息、选课学生信息");
-        dataList.add("4.按课程名查找   课程信息、选课学生信息");
+        dataList.add("1.通过学生学号来查询 学生的基本信息、成绩信息");
+        dataList.add("2.通过学生姓名来查询 学生的基本信息、成绩信息");
+        dataList.add("3.通过课程号来查询 课程的信息、已选了该课程的学生信息");
+        dataList.add("4.通过课程名来查询 课程的信息、已选了该课程的学生信息");
         adapter.notifyDataSetChanged();
         listView.setSelection(0);
 

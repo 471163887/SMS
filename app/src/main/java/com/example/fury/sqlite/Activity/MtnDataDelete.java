@@ -59,7 +59,6 @@ public class MtnDataDelete extends ActionBarActivity implements View.OnClickList
                 DeleteFragment deleteFragment2 = new DeleteFragment(MtnDataDelete.this,2);
                 ft.replace(R.id.del_frag, deleteFragment2);
                 Log.d("nimeiya", "hi5");
-                //transaction.replace(R.id.id_content, mFriend);
                 break;
         }
         // transaction.addToBackStack();

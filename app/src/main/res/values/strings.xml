@@ -28,6 +28,13 @@
     <string name="title_activity_inf_with_stu_name">InfWithStuName</string>
     <string name="title_activity_inf_with_cou_num">InfWithCouNum</string>
     <string name="title_activity_inf_with_cou_name">InfWithCouName</string>
-    <string name="title_activity_mtn_data_delete">MtnDataDelete</string>
-    <string name="title_activity_mtn_data_modify">MtnDataModify</string>
+    <string name="title_activity_mtn_data_delete">数据删除</string>
+    <string name="title_activity_mtn_data_modify">修改信息</string>
+    <string name="title_activity_show_sco_with_cla_cou">ShowScoWithClaCou</string>
+    <string name="title_activity_show_sco_with_cou_cla">ShowScoWithCouCla</string>
+    <string name="title_activity_show_loser_with_cla">ShowLoserWithCla</string>
+    <string name="title_activity_show_stupid_with_cou">ShowStupidWithCou</string>
+    <string name="title_activity_show_student">ShowStudent</string>
+    <string name="title_activity_show_coureses">ShowCoureses</string>
+    <string name="title_activity_show_scores">ShowScores</string>
 </resources>

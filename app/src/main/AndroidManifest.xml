@@ -59,6 +59,34 @@
             android:name=".Activity.MtnDataModify"
             android:label="@string/title_activity_mtn_data_modify" >
         </activity>
+        <activity
+            android:name=".Activity.ShowScoWithClaCou"
+            android:label="@string/title_activity_show_sco_with_cla_cou" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowScoWithCouCla"
+            android:label="@string/title_activity_show_sco_with_cou_cla" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowLoserWithCla"
+            android:label="@string/title_activity_show_loser_with_cla" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowStupidWithCou"
+            android:label="@string/title_activity_show_stupid_with_cou" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowStudent"
+            android:label="@string/title_activity_show_student" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowCoureses"
+            android:label="@string/title_activity_show_coureses" >
+        </activity>
+        <activity
+            android:name=".Activity.ShowScores"
+            android:label="@string/title_activity_show_scores" >
+        </activity>
     </application>
 
 </manifest>

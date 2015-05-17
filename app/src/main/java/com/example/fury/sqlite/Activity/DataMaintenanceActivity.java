@@ -43,21 +43,18 @@ public class DataMaintenanceActivity extends ActionBarActivity {
     }
     public class CreateOnClickListener implements View.OnClickListener {
         public void onClick(View v) {
-            //创建一个DatabaseHelper类的对象，该类是单独一个java文件,这里采用2个参数的构造函数，建立的数据
             DatabaseHelper database_helper = new DatabaseHelper(DataMaintenanceActivity.this, "stu_manager.db");
             SQLiteDatabase db = database_helper.getReadableDatabase();
             Toast.makeText(DataMaintenanceActivity.this,"Create Database Successed !",Toast.LENGTH_LONG).show();
         }
     }
     public class InsertOnClickListener implements View.OnClickListener {
-
         public void onClick(View v) {
             Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataInsert.class);
             startActivity(intent);
         }
     }
     public class DeleteOnClickListener implements View.OnClickListener {
-
         public void onClick(View v) {
             Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataDelete.class);
             startActivity(intent);

@@ -1,6 +1,5 @@
 package com.example.fury.sqlite.Fragment;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,11 +42,10 @@ public class AddCourseFragment extends Fragment {
         mContext = context;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mView = inflater.inflate(R.layout.fragment_add_course, container, false);
         commit = (Button)mView.findViewById(R.id.btn_confirm);
         commit.setOnClickListener(new View.OnClickListener() {
@@ -60,18 +58,15 @@ public class AddCourseFragment extends Fragment {
                 et_cname = (EditText)mView.findViewById(R.id.et_cname);
                 cname = et_cname.getText().toString();
 
-
-
                 et_credit = (EditText)mView.findViewById(R.id.et_credit);
                 credit = Integer.parseInt(et_credit.getText().toString());
 
-
                 if(et_credit.equals(null) || et_cname.equals(null) || et_cnum.equals(null))
                 {
-                    Toast.makeText(mContext, "输入不完整！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "杈撳叆淇℃伅涓嶅畬鏁达紒", Toast.LENGTH_SHORT).show();
                     return ;
                 }
-                Toast.makeText(mContext, "输入正确！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "鍚堟硶鐨勮緭鍏ワ紒", Toast.LENGTH_SHORT).show();
 
                 OptionalCourses optionalCourses = new OptionalCourses( credit, cnum, cname);
 
@@ -80,19 +75,14 @@ public class AddCourseFragment extends Fragment {
                 db = dbHelper.getWritableDatabase();
 
                 ContentValues values = new ContentValues();
-
                 values.put("Sname", optionalCourses.getCname());
                 values.put("Cnum", optionalCourses.getCnum());
                 values.put("Ccredit", optionalCourses.getCcredit());
-
-
                 db.insert("Courses", null, values);
-                Toast.makeText(mContext, "插入数据库成功！", Toast.LENGTH_SHORT).show();
 
+                Toast.makeText(mContext, "鎻掑叆鏁版嵁搴撴垚鍔燂紒", Toast.LENGTH_SHORT).show();
             }
         });
         return mView;
     }
-
-
 }
