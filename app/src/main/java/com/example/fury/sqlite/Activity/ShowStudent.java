@@ -1,6 +1,7 @@
 package com.example.fury.sqlite.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -8,9 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.fury.sqlite.DatabaseHelper;
 import com.example.fury.sqlite.R;
@@ -30,6 +35,7 @@ public class ShowStudent extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_student);
+        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         Log.d("nimeiya", "我要打开数据库了哦！");
         DatabaseHelper dbHelper= new DatabaseHelper(ShowStudent.this,
                 "stu_manager.db", null, 1);
@@ -39,7 +45,22 @@ public class ShowStudent extends ActionBarActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
-        dataList.add("哈喽");
+        dataList.add("刷新");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view,
+                                    int position, long id) {
+                if (id == 0) {
+                    Log.d("nimeiya", "可以点不？");
+
+                    Intent intent = new Intent(ShowStudent.this, ShowStudent.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+        });
 
         Log.d("nimeiya","我要对数据库排序了哦！");
         //String sortStudent = "select * from Student order by Snum asc";
@@ -62,6 +83,8 @@ public class ShowStudent extends ActionBarActivity {
                 Log.d("nimeiya",fommat);
                 dataList.add(fommat);
             }
+        } else {
+            Toast.makeText(ShowStudent.this, "暂无学生信息", Toast.LENGTH_SHORT).show();
         }
         Log.d("nimeiya","执行OK！");
         adapter.notifyDataSetChanged();

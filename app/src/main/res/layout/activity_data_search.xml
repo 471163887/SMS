@@ -4,8 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:focusable="true"
+        android:src="@drawable/pika2"
+        android:id="@+id/imageView3" />
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"

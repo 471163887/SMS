@@ -1,5 +1,6 @@
 package com.example.fury.sqlite.Activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
@@ -7,8 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.fury.sqlite.DatabaseHelper;
 import com.example.fury.sqlite.R;
@@ -27,6 +32,7 @@ public class ShowScores extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_scores);
+        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         DatabaseHelper dbHelper= new DatabaseHelper(ShowScores.this,
                 "stu_manager.db", null, 1);
@@ -36,11 +42,24 @@ public class ShowScores extends ActionBarActivity {
         Log.d(getPackageName(), listView != null ? "listView is not null!" : "listView is null!");
         adapter = new ArrayAdapter<String>(ShowScores.this, android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
-        dataList.add("哈喽");
-        adapter.notifyDataSetChanged();
-        listView.setSelection(0);
+        dataList.add("刷新");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        Cursor cursor = db.query("Scores",null, null, null, null, null, "course_num ASC");
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view,
+                                    int position, long id) {
+                if (id == 0) {
+                    Log.d("nimeiya", "可以点不？");
+                    Intent intent = new Intent(ShowScores.this, ShowScores.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+        });
+
+
+        Cursor cursor = db.query("Scores",null, null, null, null, null, "course_num ASC, student_num ASC");
 
         if(cursor.moveToFirst()){
             for(int i=0;i<cursor.getCount();i++){
@@ -54,7 +73,11 @@ public class ShowScores extends ActionBarActivity {
                 Log.d("nimeiya", fommat);
                 dataList.add(fommat);
             }
+        }else {
+            Toast.makeText(ShowScores.this, "暂无成绩信息", Toast.LENGTH_SHORT).show();
         }
+        adapter.notifyDataSetChanged();
+        listView.setSelection(0);
         db.close();
     }
     static public String sprintfScores(String cnum, String cname,String ccredit){

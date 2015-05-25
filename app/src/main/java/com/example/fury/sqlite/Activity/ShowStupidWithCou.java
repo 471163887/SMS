@@ -54,7 +54,7 @@ public class ShowStupidWithCou extends ActionBarActivity {
                 String cname = cursor.getString(4);
 
                 int failLine = Integer.parseInt(score);
-                if (failLine<60) {
+                if (failLine < 60) {
                     String format = sprintfLoser(course_num, cname, sname);
                     dataList.add(format);
                 }

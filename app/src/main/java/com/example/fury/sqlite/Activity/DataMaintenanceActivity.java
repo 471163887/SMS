@@ -50,7 +50,7 @@ public class DataMaintenanceActivity extends ActionBarActivity {
     }
     public class InsertOnClickListener implements View.OnClickListener {
         public void onClick(View v) {
-            Intent intent=new Intent(DataMaintenanceActivity.this, MtnDataInsert.class);
+            Intent intent = new Intent(DataMaintenanceActivity.this, MtnDataInsert.class);
             startActivity(intent);
         }
     }

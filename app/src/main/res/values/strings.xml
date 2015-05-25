@@ -37,4 +37,11 @@
     <string name="title_activity_show_student">ShowStudent</string>
     <string name="title_activity_show_coureses">ShowCoureses</string>
     <string name="title_activity_show_scores">ShowScores</string>
+    <!-- TODO: 自定义字符串 -->
+    <string name="show_student">Show Students</string>
+    <string name="show_coureses">Show Coureses</string>
+    <string name="show_Scores">Show Scores</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="title_activity_student_login_in">StudentLoginInActivity</string>
 </resources>

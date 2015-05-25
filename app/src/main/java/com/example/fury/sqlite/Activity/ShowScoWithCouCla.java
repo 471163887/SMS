@@ -64,7 +64,7 @@ public class ShowScoWithCouCla extends ActionBarActivity {
     }
     static public String sprintfScoWithCouCla(String sclass,String course_num,String socre){
         String s;
-        s = String.format("%-15s|%15s     |%15s", sclass,course_num,socre);
+        s = String.format("%-15s|%15s          |%15s", sclass,course_num,socre);
         return s;
     }
 

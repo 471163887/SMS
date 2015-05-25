@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.fury.sqlite.DatabaseHelper;
+import com.example.fury.sqlite.model.OptionalCourses;
+import com.example.fury.sqlite.model.Scores;
 import com.example.fury.sqlite.model.Student;
 
 /**
@@ -53,6 +55,30 @@ public class StuManagerDB {
             values.put("Sage", student.getSage());
             values.put("Sphone", student.getSphone());
             db.insert("Student", null, values);
+        }
+    }
+    /**
+     * 将Courses实例存储到数据库
+     */
+    public void saveCourses(OptionalCourses course){
+        if(course != null){
+            ContentValues values = new ContentValues();
+            values.put("Cnum", course.getCnum());
+            values.put("Sname", course.getCname());
+            values.put("Ccredit", course.getCcredit());
+            db.insert("Courses", null, values);
+        }
+    }
+    /**
+     * 将Scores实例存储到数据库
+     */
+    public void saveScores(Scores scores){
+        if(scores != null){
+            ContentValues values = new ContentValues();
+            values.put("Cnum", scores.getCnum());
+            values.put("Snum", scores.getSnum());
+            values.put("Score", scores.getScore());
+            db.insert("Scores", null, values);
         }
     }
 }

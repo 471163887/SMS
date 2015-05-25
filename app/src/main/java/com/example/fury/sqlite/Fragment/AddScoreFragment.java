@@ -3,6 +3,7 @@ package com.example.fury.sqlite.Fragment;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -62,7 +63,7 @@ public class AddScoreFragment extends Fragment {
                 score = et_score.getText().toString();
 
 
-                if(et_cnum.equals(null) || et_snum.equals(null) || et_score.equals(null))
+                if(cnum.equals("") || snum.equals("") || score.equals(""))
                 {
                     Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
                     return ;
@@ -74,6 +75,12 @@ public class AddScoreFragment extends Fragment {
                 DatabaseHelper dbHelper= new DatabaseHelper(mContext,
                         "stu_manager.db", null, 1);
                 db = dbHelper.getWritableDatabase();
+                Cursor cursor = db.query("Scores", new String[]{"course_num", "student_num", "score"},
+                        "course_num=? and student_num=?", new String[]{cnum,snum}, null, null, null);
+                if(cursor.moveToFirst()){
+                    Toast.makeText(mContext, "该成绩已存在！ \n 插入此成绩信息失效！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 ContentValues values = new ContentValues();
 

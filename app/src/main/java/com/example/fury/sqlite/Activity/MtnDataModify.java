@@ -2,22 +2,29 @@ package com.example.fury.sqlite.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.TabHost;
 
-import com.example.fury.sqlite.Fragment.DeleteFragment;
 import com.example.fury.sqlite.Fragment.ModifyFragment;
 import com.example.fury.sqlite.R;
 
-public class MtnDataModify extends ActionBarActivity implements View.OnClickListener {
+public class MtnDataModify extends TabActivity implements View.OnClickListener {
     private Button modifyStudent;
     private Button modifyCourse;
     private Button modifyScore;
+
+    private TabHost tabHost;
+
+    private Intent showStudent;
+    private Intent showCoureses;
+    private Intent showScores;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,31 +36,14 @@ public class MtnDataModify extends ActionBarActivity implements View.OnClickList
         modifyCourse.setOnClickListener(MtnDataModify.this);
         modifyScore = (Button)findViewById(R.id.btn_score);
         modifyScore.setOnClickListener(MtnDataModify.this);
+
+        tabHost = getTabHost();
+        initIntent();
+        addSpec();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mtn_data_modify, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onClick(View v) {
         FragmentManager fm = getFragmentManager();
-        // ¿ªÆôFragmentÊÂÎñ
         FragmentTransaction ft = fm.beginTransaction();
         Log.d("nimeiya", "hi2");
         switch (v.getId())
@@ -75,5 +65,25 @@ public class MtnDataModify extends ActionBarActivity implements View.OnClickList
                 break;
         }
         ft.commit();
+    }
+    private void initIntent() {
+        showStudent = new Intent(this, ShowStudent.class);
+        showCoureses = new Intent(this, ShowCoureses.class);
+        showScores = new Intent(this, ShowScores.class);
+    }
+    private void addSpec() {
+        tabHost.addTab(this.buildTagSpec("tab_student",
+                R.string.show_student,R.drawable.add, showStudent)); //
+        tabHost.addTab(this.buildTagSpec("tab_coureses",
+                R.string.show_coureses, R.drawable.delete, showCoureses));
+        tabHost.addTab(this.buildTagSpec("tab_scores",
+                R.string.show_Scores, R.drawable.query, showScores));
+    }
+    private TabHost.TabSpec buildTagSpec(String tagName, int tagLable,
+                                         int icon, Intent content) {
+        return tabHost
+                .newTabSpec(tagName)
+                .setIndicator(getResources().getString(tagLable),
+                        getResources().getDrawable(icon)).setContent(content);
     }
 }

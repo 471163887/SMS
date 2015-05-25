@@ -2,8 +2,12 @@ package com.example.fury.sqlite.Fragment;
 
 import android.app.Activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -97,61 +101,60 @@ public class AddStuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 et_snum = (EditText)mView.findViewById(R.id.et_snum);
-                Snum = et_snum.getText().toString();
-
                 et_sname = (EditText)mView.findViewById(R.id.et_sname);
-                Sname = et_sname.getText().toString();
-
                 et_sclass = (EditText)mView.findViewById(R.id.et_sclass);
-                Sclass = et_sclass.getText().toString();
-
                 et_ssex = (EditText)mView.findViewById(R.id.et_ssex);
-                Ssex = et_ssex.getText().toString();
-
                 et_sphone = (EditText)mView.findViewById(R.id.et_sphone);
-                Sphone = et_sphone.getText().toString().trim();
-
                 et_sage = (EditText)mView.findViewById(R.id.et_sage);
+
+                Snum = et_snum.getText().toString();
+                Sname = et_sname.getText().toString();
+                Sclass = et_sclass.getText().toString();
+                Ssex = et_ssex.getText().toString();
+                Sphone = et_sphone.getText().toString().trim();
+                String tempSage = et_sage.getText().toString();
+
+                if(Snum.equals("") || Sname.equals("") || Sclass.equals("")
+                        || Ssex.equals("")|| Sphone.equals("")|| tempSage.equals(""))
+                {
+                    Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 Sage = Integer.parseInt(et_sage.getText().toString());
 
-                if(et_sage.equals(null))
-                {
-                    et_sage.setError("请输入年龄");
+
+                    Toast.makeText(mContext, "输入正确！", Toast.LENGTH_SHORT).show();
+                    Log.d("nimeiya", Snum);
+                    Log.d("nimeiya", Sname);
+                    Log.d("nimeiya", Ssex);
+                    Log.d("nimeiya", Sclass);
+                    Log.d("nimeiya", Sphone);
+                    Log.d("nimeiya", et_sage.getText().toString());
+                    Student student = new Student(Sage,Snum,Sname,Sphone,Ssex,Sclass);
+
+                    DatabaseHelper dbHelper= new DatabaseHelper(mContext,
+                            "stu_manager.db", null, 1);
+                    db = dbHelper.getWritableDatabase();
+                    Cursor cursor = db.query("student", new String[]{"Snum"},
+                            "Snum=?", new String[]{Snum}, null, null, null);
+                    if(cursor.moveToFirst()){
+                        Toast.makeText(mContext, "该学生已存在！ \n 插入此成绩信息失效！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    ContentValues values = new ContentValues();
+
+                    values.put("Snum", student.getSnum());
+                    values.put("Sclass", student.getSclass());
+                    values.put("Sname", student.getSname());
+                    values.put("Ssex", student.getSsex());
+                    values.put("Sphone", student.getSphone());
+                    values.put("Sage", student.getSage());
+
+                    db.insert("Student", null, values);
+                    Toast.makeText(mContext, "插入数据库成功！", Toast.LENGTH_SHORT).show();
                 }
-                if(et_snum.equals(null) || et_sname.equals(null) || et_sclass.equals(null)
-                        || et_ssex.equals(null) || et_sphone.equals(null) || et_sage.equals(null))
-                {
-                    Toast.makeText(mContext, "输入不完整！", Toast.LENGTH_SHORT).show();
-                    //return ;
-                }
-                Toast.makeText(mContext, "输入正确！", Toast.LENGTH_SHORT).show();
-                Log.d("nimeiya", Snum);
-                Log.d("nimeiya", Sname);
-                Log.d("nimeiya", Ssex);
-                Log.d("nimeiya", Sclass);
-                Log.d("nimeiya", Sphone);
-                Log.d("nimeiya", et_sage.getText().toString());
-                Student student = new Student(Sage,Snum,Sname,Sphone,Ssex,Sclass);
-
-                DatabaseHelper dbHelper= new DatabaseHelper(mContext,
-                        "stu_manager.db", null, 1);
-                db = dbHelper.getWritableDatabase();
-
-                ContentValues values = new ContentValues();
-
-                values.put("Snum", student.getSnum());
-                values.put("Sclass", student.getSclass());
-                values.put("Sname", student.getSname());
-                values.put("Ssex", student.getSsex());
-                values.put("Sphone", student.getSphone());
-                values.put("Sage", student.getSage());
-
-                db.insert("Student", null, values);
-                Toast.makeText(mContext, "插入数据库成功！", Toast.LENGTH_SHORT).show();
-
-            }
         });
-
         return mView;
     }
 /*

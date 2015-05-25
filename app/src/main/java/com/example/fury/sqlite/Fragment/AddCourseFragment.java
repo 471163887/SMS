@@ -2,6 +2,7 @@ package com.example.fury.sqlite.Fragment;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -59,13 +60,15 @@ public class AddCourseFragment extends Fragment {
                 cname = et_cname.getText().toString();
 
                 et_credit = (EditText)mView.findViewById(R.id.et_credit);
-                credit = Integer.parseInt(et_credit.getText().toString());
+                String tempCredit = et_credit.getText().toString();
 
-                if(et_credit.equals(null) || et_cname.equals(null) || et_cnum.equals(null))
+
+                if(cnum.equals("") || cname.equals("") || tempCredit.equals(""))
                 {
                     Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
                     return ;
                 }
+                credit = Integer.parseInt(tempCredit);
                 Toast.makeText(mContext, "合法的输入！", Toast.LENGTH_SHORT).show();
 
                 OptionalCourses optionalCourses = new OptionalCourses( credit, cnum, cname);
@@ -73,6 +76,13 @@ public class AddCourseFragment extends Fragment {
                 DatabaseHelper dbHelper= new DatabaseHelper(mContext,
                         "stu_manager.db", null, 1);
                 db = dbHelper.getWritableDatabase();
+
+                Cursor cursor = db.query("courses", new String[]{"Cnum"},
+                        "Cnum=? ", new String[]{cnum}, null, null, null);
+                if(cursor.moveToFirst()){
+                    Toast.makeText(mContext, "该课程已存在！ \n 插入此成绩信息失效！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 ContentValues values = new ContentValues();
                 values.put("Sname", optionalCourses.getCname());

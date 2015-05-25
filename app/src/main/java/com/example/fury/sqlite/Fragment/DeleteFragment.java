@@ -2,6 +2,7 @@ package com.example.fury.sqlite.Fragment;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -42,7 +43,6 @@ public class DeleteFragment extends Fragment {
         mContext = context;
         mEvent = event;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,11 +86,21 @@ public class DeleteFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Snum = et_snum.getText().toString();
-                    //DatabaseHelper database_helper = new DatabaseHelper(DeleteFragment.this, "stu_manager.db");
+                    if(Snum.equals("")) {
+                        Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
                     DatabaseHelper dbHelper = new DatabaseHelper(mContext,
                             "stu_manager.db", null, 1);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+                    Cursor cursor = db.query("Student", new String[]{"Snum"},
+                            "Snum=?", new String[]{Snum}, null, null, null);
+                    if(!cursor.moveToFirst()){
+                        Toast.makeText(mContext, " 该学号不存在！\n 未执行删除操作！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    //删除学生前应先删除  学生与课程之间的关系。
+                    db.delete("scores", "student_num=?", new String[]{Snum});
                     db.delete("Student", "Snum=?", new String[]{Snum});
                     Log.d("nimeiya", Snum);
                     Log.d("nimeiya", "Snum删不掉");
@@ -105,13 +115,22 @@ public class DeleteFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Cnum = et_cnum.getText().toString();
+                    if(Cnum.equals("")) {
+                        Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
                     DatabaseHelper dbHelper = new DatabaseHelper(mContext,
                             "stu_manager.db", null, 1);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+                    Cursor cursor = db.query("Courses", new String[]{"Sname"},
+                            "Cnum=?", new String[]{Cnum}, null, null, null);
+                    if(!cursor.moveToFirst()){
+                        Toast.makeText(mContext, "该课程号不存在！\n 未执行删除操作！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    db.delete("scores", "course_num=?", new String[]{Cnum});
                     db.delete("Courses", "Cnum=?", new String[]{Cnum});
-                    Log.d("nimeiya", Cnum);
-                    Log.d("nimeiya", "Snum删不掉");
+
                     Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -124,15 +143,26 @@ public class DeleteFragment extends Fragment {
                 public void onClick(View v) {
                     Cnum = et_cnum.getText().toString();
                     Snum = et_snum.getText().toString();
+                    if(Cnum.equals("") ||Snum.equals("")) {
+                        Toast.makeText(mContext, "输入信息不完整！", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+
                     DatabaseHelper dbHelper = new DatabaseHelper(mContext,
                             "stu_manager.db", null, 1);
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    //=========================容错============================
+                    Cursor cursor = db.query("Scores", new String[]{"course_num", "student_num", "score"},
+                            "course_num=? and student_num=?", new String[]{Cnum, Snum}, null, null, null);
+                    if(!cursor.moveToFirst()){
+                        Toast.makeText(mContext, " 该成绩不存在！ \n 未执行删除操作！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     String delStatment = "Delete From Scores Where student_num = " + Snum
                             +" And course_num = " + Cnum;
                     db.execSQL(delStatment);
                     Log.d("nimeiya", Cnum);
                     Log.d("nimeiya", Snum);
-                    Log.d("nimeiya", "Snum删不掉");
                     Toast.makeText(mContext, "删除成功！", Toast.LENGTH_SHORT).show();
                 }
             });

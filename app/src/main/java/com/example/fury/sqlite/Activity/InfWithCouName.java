@@ -62,7 +62,6 @@ public class InfWithCouName extends ActionBarActivity {
                     optionalCourses.setCname(cursor.getString(cursor.getColumnIndex("Sname")));
                     optionalCourses.setCcredit(cursor.getInt(cursor.getColumnIndex("Ccredit")));
 
-
                     Log.d("nimeiya", "查询一个牛结束");
                     listView = (ListView) findViewById(R.id.list_view);
                     adapter = new ArrayAdapter<String>(InfWithCouName.this,
@@ -72,7 +71,7 @@ public class InfWithCouName extends ActionBarActivity {
                     dataList.add("课程号：" + optionalCourses.getCnum());
                     dataList.add("课程名：" + optionalCourses.getCname());
                     dataList.add("学分：" + optionalCourses.getCcredit());
-                    dataList.add("==============选课的学生信息==============");
+                    dataList.add("====选课的学生信息====");
 
                     cursor = db.query("Scores", new String[]{"student_num", "course_num", "Score"},
                             "course_num=?", new String[]{optionalCourses.getCnum()}, null, null, null);
