@@ -38,7 +38,6 @@ public class MtnDataInsert extends TabActivity implements View.OnClickListener {
         addCourse.setOnClickListener(MtnDataInsert.this);
         Button addScore = (Button) findViewById(R.id.btn_score);
         addScore.setOnClickListener(MtnDataInsert.this);
-        Log.d("nimeiya", "hi");
 
         tabHost = getTabHost();
         initIntent();
@@ -64,7 +63,6 @@ public class MtnDataInsert extends TabActivity implements View.OnClickListener {
             case R.id.btn_score:
                 AddScoreFragment addScoreFragment = new AddScoreFragment(MtnDataInsert.this);
                 ft.replace(R.id.add_std, addScoreFragment);
-                Log.d("nimeiya", "hi5");
                 break;
         }
         // transaction.addToBackStack();

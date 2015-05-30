@@ -52,11 +52,9 @@ public class InfWithCouName extends ActionBarActivity {
 
                 et_snum = (EditText) findViewById(R.id.et_snum);
                 selectCondition = et_snum.getText().toString();
-                Log.d("nimeiya", "1.通过课程名查询");
                 Cursor cursor = db.query("Courses", new String[]{"Cnum", "Sname", "Ccredit"},
                         "Sname=?", new String[]{selectCondition}, null, null, null);
                 if (cursor.moveToNext()) {
-                    Log.d("nimeiya", "2.通过课程名查询查询成功！");
                     OptionalCourses optionalCourses = new OptionalCourses();
                     optionalCourses.setCnum(cursor.getString(cursor.getColumnIndex("Cnum")));
                     optionalCourses.setCname(cursor.getString(cursor.getColumnIndex("Sname")));
@@ -77,7 +75,6 @@ public class InfWithCouName extends ActionBarActivity {
                             "course_num=?", new String[]{optionalCourses.getCnum()}, null, null, null);
 
                     if (cursor.moveToNext()) {
-                        Log.d("nimeiya", "查询到一个成绩");
                         Scores scores = new Scores();
                         scores.setSnum(cursor.getString(cursor.getColumnIndex("student_num")));
 
@@ -85,7 +82,6 @@ public class InfWithCouName extends ActionBarActivity {
                                 "Snum=?", new String[]{scores.getSnum()}, null, null, null);
 
                         while(cursor2.moveToNext()) {
-                            Log.d("nimeiya", "查询一个牛");
                             Student student = new Student();
                             student.setSnum(cursor2.getString(cursor2.getColumnIndex("Snum")));
                             student.setSclass(cursor2.getString(cursor2.getColumnIndex("Sclass")));
@@ -108,33 +104,11 @@ public class InfWithCouName extends ActionBarActivity {
                     linearLayout = (LinearLayout) findViewById(R.id.mylinearlayout);
                     linearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(InfWithCouName.this, "未发现该野生的神奇宝贝！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(InfWithCouName.this, "未发现该课程！", Toast.LENGTH_LONG).show();
                 }
 
             }
 
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_inf_with_cou_name, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

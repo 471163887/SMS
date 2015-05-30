@@ -58,7 +58,6 @@ public class InfWithStuNum extends ActionBarActivity {
                 Cursor cursor = db.query("Student", new String[]{"Snum","Sclass","Sname","Ssex","Sphone","Sage"},
                         "Snum=?", new String[]{selectCondition}, null, null, null);
                 if(cursor.moveToNext()){
-                    Log.d("nimeiya", "查询一个牛");
                         Student student = new Student();
                         student.setSnum(cursor.getString(cursor.getColumnIndex("Snum")));
                         student.setSclass(cursor.getString(cursor.getColumnIndex("Sclass")));
@@ -67,8 +66,6 @@ public class InfWithStuNum extends ActionBarActivity {
                         student.setSphone(cursor.getString(cursor.getColumnIndex("Sphone")));
                         student.setSage(cursor.getInt(cursor.getColumnIndex("Sage")));
 
-                    //String sphone = cursor.getString(cursor.getColumnIndex("Sphone"));
-                    Log.d("nimeiya", "查询一个牛结束");
                     listView = (ListView) findViewById(R.id.list_view);
                     adapter = new ArrayAdapter<String>(InfWithStuNum.this,
                             android.R.layout.simple_list_item_1, dataList);
@@ -85,7 +82,6 @@ public class InfWithStuNum extends ActionBarActivity {
                             "student_num=?", new String[]{selectCondition}, null, null, null);
 
                     while (cursor.moveToNext()) {
-                        Log.d("nimeiya", "查询到一个牛的成绩");
                         Scores scores= new Scores();
                         scores.setSnum(cursor.getString(cursor.getColumnIndex("student_num")));
                         scores.setCnum(cursor.getString(cursor.getColumnIndex("course_num")));
@@ -101,7 +97,7 @@ public class InfWithStuNum extends ActionBarActivity {
                     linearLayout = (LinearLayout) findViewById(R.id.mylinearlayout);
                     linearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(InfWithStuNum.this,"未发现该野生的学号",Toast.LENGTH_LONG).show();
+                    Toast.makeText(InfWithStuNum.this,"未发现该神奇宝贝！",Toast.LENGTH_LONG).show();
                 }
 
             }

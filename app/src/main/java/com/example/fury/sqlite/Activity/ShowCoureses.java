@@ -49,7 +49,6 @@ public class ShowCoureses extends ActionBarActivity {
             public void onItemClick(AdapterView<?> arg0, View view,
                                     int position, long id) {
                 if (id == 0) {
-                    Log.d("nimeiya", "可以点不？");
                     Intent intent = new Intent(ShowCoureses.this, ShowCoureses.class);
                     startActivity(intent);
                     finish();
@@ -67,7 +66,6 @@ public class ShowCoureses extends ActionBarActivity {
                 String cname=cursor.getString(1);
                 int ccredit = cursor.getInt(2);
                 String fommat = sprintfCourses(cnum, cname, ccredit);
-                Log.d("nimeiya", fommat);
                 dataList.add(fommat);
             }
         } else {
@@ -81,26 +79,5 @@ public class ShowCoureses extends ActionBarActivity {
         String s;
         s = String.format("%-15s|%-15s|%15s",cnum,cname,ccredit);
         return s;
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_coureses, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

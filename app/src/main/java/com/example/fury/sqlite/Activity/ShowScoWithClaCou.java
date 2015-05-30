@@ -24,11 +24,7 @@ public class ShowScoWithClaCou extends ActionBarActivity {
     private ArrayAdapter<String> adapter;
 
     private List<String> dataList = new ArrayList<String>();
-    /*
-    public static final String CREATE_CLACOUTABLE = "create table clacouscore("
-            +"class text,"
-            +"cnum text,"
-            +"socre integer)";*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +71,6 @@ public class ShowScoWithClaCou extends ActionBarActivity {
                         String score = cursor3.getString(0);
                         String course_num = cursor3.getString(1);
                         Log.d("nimeiya 成绩：", score);
-                        Log.d("nimeiya 课程号：", course_num);
                         String fommat = sprintfScoWithClaCou(Sclass,course_num,score);
                         dataList.add(fommat);
                         cursor3.moveToNext();
@@ -84,27 +79,6 @@ public class ShowScoWithClaCou extends ActionBarActivity {
                 cursor.moveToNext();
             }
         }
-        //Cursor cursor = db.query("student",null, null, null, null, null, "Sclass ASC");
-        //Cursor cursor2 = db.query("Scores", null, null, null, null, null, "course_num ASC");
-        /*
-        if(cursor.moveToFirst()){
-            for(int i=0;i<cursor.getCount();i++){
-                //cursor.move(i);
-                cursor.moveToPosition(i);
-                String Snum=cursor.getString(0);
-                String Sclass=cursor.getString(1);
-
-                ContentValues values = new ContentValues();
-
-                values.put("class", Sclass);
-                values.put("cnum", );
-                values.put("score", );
-
-                String fommat = sprintfScoWithClaCou(Sclass);
-                Log.d("nimeiya", fommat);
-                dataList.add(fommat);
-            }
-        }*/
         adapter.notifyDataSetChanged();
         listView.setSelection(0);
         db.close();
@@ -113,23 +87,5 @@ public class ShowScoWithClaCou extends ActionBarActivity {
         String s;
         s = String.format("%-15s|%15s     |%15s", sclass,course_num,socre);
         return s;
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_sco_with_cla_cou, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

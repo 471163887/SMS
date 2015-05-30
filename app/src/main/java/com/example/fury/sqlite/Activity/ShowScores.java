@@ -32,7 +32,6 @@ public class ShowScores extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_scores);
-        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         DatabaseHelper dbHelper= new DatabaseHelper(ShowScores.this,
                 "stu_manager.db", null, 1);
@@ -49,7 +48,6 @@ public class ShowScores extends ActionBarActivity {
             public void onItemClick(AdapterView<?> arg0, View view,
                                     int position, long id) {
                 if (id == 0) {
-                    Log.d("nimeiya", "可以点不？");
                     Intent intent = new Intent(ShowScores.this, ShowScores.class);
                     startActivity(intent);
                     finish();
@@ -58,19 +56,15 @@ public class ShowScores extends ActionBarActivity {
 
         });
 
-
         Cursor cursor = db.query("Scores",null, null, null, null, null, "course_num ASC, student_num ASC");
 
         if(cursor.moveToFirst()){
             for(int i=0;i<cursor.getCount();i++){
-
-                //cursor.move(i);
                 cursor.moveToPosition(i);
                 String snum=cursor.getString(0);
                 String cnum=cursor.getString(1);
                 String score= cursor.getString(2);
                 String fommat = sprintfScores(snum, cnum, score);
-                Log.d("nimeiya", fommat);
                 dataList.add(fommat);
             }
         }else {
@@ -84,22 +78,5 @@ public class ShowScores extends ActionBarActivity {
         String s;
         s = String.format("%-15s|%-15s|%15s",cnum,cname,ccredit);
         return s;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_show_scores, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

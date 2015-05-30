@@ -63,12 +63,11 @@ public class InfWithStuName extends ActionBarActivity {
                     student.setSphone(cursor.getString(cursor.getColumnIndex("Sphone")));
                     student.setSage(cursor.getInt(cursor.getColumnIndex("Sage")));
 
-                    //String sphone = cursor.getString(cursor.getColumnIndex("Sphone"));
-
                     listView = (ListView) findViewById(R.id.list_view);
                     adapter = new ArrayAdapter<String>(InfWithStuName.this,
                             android.R.layout.simple_list_item_1, dataList);
                     listView.setAdapter(adapter);
+
                     dataList.add("学号：" + student.getSnum());
                     dataList.add("姓名：" + student.getSname());
                     dataList.add("班级：" + student.getSclass());
@@ -97,7 +96,7 @@ public class InfWithStuName extends ActionBarActivity {
                     linearLayout = (LinearLayout) findViewById(R.id.mylinearlayout);
                     linearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(InfWithStuName.this, "未发现野外的神奇宝贝！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(InfWithStuName.this, "未发现该课程！", Toast.LENGTH_LONG).show();
                 }
             }
         });

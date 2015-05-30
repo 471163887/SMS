@@ -35,8 +35,6 @@ public class ShowStudent extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_student);
-        //supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        Log.d("nimeiya", "我要打开数据库了哦！");
         DatabaseHelper dbHelper= new DatabaseHelper(ShowStudent.this,
                 "stu_manager.db", null, 1);
         db = dbHelper.getWritableDatabase();
@@ -52,8 +50,6 @@ public class ShowStudent extends ActionBarActivity {
             public void onItemClick(AdapterView<?> arg0, View view,
                                     int position, long id) {
                 if (id == 0) {
-                    Log.d("nimeiya", "可以点不？");
-
                     Intent intent = new Intent(ShowStudent.this, ShowStudent.class);
                     startActivity(intent);
                     finish();
@@ -62,31 +58,24 @@ public class ShowStudent extends ActionBarActivity {
 
         });
 
-        Log.d("nimeiya","我要对数据库排序了哦！");
-        //String sortStudent = "select * from Student order by Snum asc";
-        //db.execSQL(sortStudent);
         Cursor cursor = db.query("student",null, null, null, null, null, "snum ASC");
-        //判断游标是否为空
         if(cursor.moveToFirst()){
-            //遍历游标
             for(int i=0;i<cursor.getCount();i++){
-                //cursor.move(i);
                 cursor.moveToPosition(i);
+
                 String Snum=cursor.getString(0);
                 String Sclass=cursor.getString(1);
                 String Sname=cursor.getString(2);
                 String Ssex=cursor.getString(3);
                 String Sphone=cursor.getString(4);
-                int age = cursor.getInt(5);
 
+                int age = cursor.getInt(5);
                 String fommat = sprintfStudent(Snum,Sclass,Sname,Ssex,Sphone,age);
-                Log.d("nimeiya",fommat);
                 dataList.add(fommat);
             }
         } else {
             Toast.makeText(ShowStudent.this, "暂无学生信息", Toast.LENGTH_SHORT).show();
         }
-        Log.d("nimeiya","执行OK！");
         adapter.notifyDataSetChanged();
         listView.setSelection(0);
         db.close();
@@ -98,26 +87,4 @@ public class ShowStudent extends ActionBarActivity {
                 snum,sclass,sname,ssex,sphone,sage);
         return s;
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_student, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

@@ -47,23 +47,19 @@ public class MtnDataDelete extends TabActivity implements View.OnClickListener {
     {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Log.d("nimeiya", "hi2");
         switch (v.getId())
         {
             case R.id.btn_std:
                 DeleteFragment deleteFragment = new DeleteFragment(MtnDataDelete.this,0);
                 ft.replace(R.id.del_frag, deleteFragment);
-                Log.d("nimeiya", "删除学生");
                 break;
             case R.id.btn_course:
                 DeleteFragment deleteFragment1 = new DeleteFragment(MtnDataDelete.this,1);
                 ft.replace(R.id.del_frag, deleteFragment1);
-                Log.d("nimeiya", "hi4");
                 break;
             case R.id.btn_score:
                 DeleteFragment deleteFragment2 = new DeleteFragment(MtnDataDelete.this,2);
                 ft.replace(R.id.del_frag, deleteFragment2);
-                Log.d("nimeiya", "hi5");
                 break;
         }
         ft.commit();

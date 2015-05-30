@@ -45,23 +45,19 @@ public class MtnDataModify extends TabActivity implements View.OnClickListener {
     public void onClick(View v) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Log.d("nimeiya", "hi2");
         switch (v.getId())
         {
             case R.id.btn_std:
                 ModifyFragment modifyFragment = new ModifyFragment(MtnDataModify.this,0);
                 ft.replace(R.id.modify_frag, modifyFragment);
-                Log.d("nimeiya", "hi3");
                 break;
             case R.id.btn_course:
                 ModifyFragment modifyFragment1 = new ModifyFragment(MtnDataModify.this,1);
                 ft.replace(R.id.modify_frag, modifyFragment1);
-                Log.d("nimeiya", "hi4");
                 break;
             case R.id.btn_score:
                 ModifyFragment modifyFragment2 = new ModifyFragment(MtnDataModify.this,2);
                 ft.replace(R.id.modify_frag, modifyFragment2);
-                Log.d("nimeiya", "hi5");
                 break;
         }
         ft.commit();
